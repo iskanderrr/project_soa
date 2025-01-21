@@ -5,6 +5,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import test.test4.dao.DonationDao;
 
+import java.util.List;
+
 /**
  * Root resource (exposed at "myresource" path)
  */
@@ -18,15 +20,22 @@ public class MyResource {
      * @return String that will be returned as a text/plain response.
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsers() {
-        return Response.ok(dao.getAllDonations()).build();
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getAllUsers() {
+        return "ddddddddd";
     }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addUser(Donation donation) {
-        dao.addDonation(donation);
-        return Response.status(Response.Status.CREATED).entity(donation).build();
+        try {
+            dao.addDonation(donation);
+            System.out.println("Donation added: " + donation); // Log donation object
+            return Response.status(Response.Status.CREATED).entity(donation).build();
+        } catch (Exception e) {
+            System.out.println("Error in adding donation: " + e.getMessage()); // Log exception
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error processing request").build();
+        }
     }
+
 }
