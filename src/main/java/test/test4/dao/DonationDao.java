@@ -25,9 +25,6 @@ public class DonationDao {
             return session.createQuery("from Donation ", Donation.class).list();
         }
     }
-
-
-}
 public boolean deleteDonationById(int id) {
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -46,3 +43,6 @@ public boolean deleteDonationById(int id) {
             throw e;  // Proper exception handling should be implemented
         }
     }
+
+}
+
