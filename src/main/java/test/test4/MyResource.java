@@ -105,6 +105,22 @@ public class MyResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Server error: " + e.getMessage()).build();
         }
     }
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateDonation(@PathParam("id") int id, Donation donation) {
+        try {
+            Donation updatedDonation = dao.updateDonation(id, donation);
+            if (updatedDonation != null) {
+                return Response.ok(updatedDonation).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).entity("Donation not found for ID: " + id).build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Server error: " + e.getMessage()).build();
+        }
+    }
 
 }
 
