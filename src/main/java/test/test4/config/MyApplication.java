@@ -10,5 +10,6 @@ public class MyApplication extends ResourceConfig {
         packages("test.test4");
         // Register additional features or components, if any
         // register(SomeFeature.class);
+        register(test.test4.filters.CORSFilter.class);
     }
 }

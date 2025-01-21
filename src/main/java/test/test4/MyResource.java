@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("myresource")
+@Path("donations")
 public class MyResource {
 
     DonationDao dao = new DonationDao();
