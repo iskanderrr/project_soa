@@ -1,9 +1,13 @@
 package test.test4;
 
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import test.test4.dao.DonationDao;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
@@ -12,7 +16,10 @@ import java.util.List;
  */
 @Path("myresource")
 public class MyResource {
+
     DonationDao dao = new DonationDao();
+
+
     /**
      * Method handling HTTP GET requests. The returned object will be sent
      * to the client as "text/plain" media type.
@@ -22,6 +29,8 @@ public class MyResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getAllUsers() {
+
+
         return "ddddddddd";
     }
     @POST
@@ -39,3 +48,4 @@ public class MyResource {
     }
 
 }
+
