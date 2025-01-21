@@ -28,3 +28,21 @@ public class DonationDao {
 
 
 }
+public boolean deleteDonationById(int id) {
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            Donation donation = session.get(Donation.class, id);
+            if (donation != null) {
+                session.delete(donation);
+                tx.commit();
+                return true;
+            } else {
+                tx.commit();
+                return false;
+            }
+        } catch (RuntimeException e) {
+            if (tx != null) tx.rollback();
+            throw e;  // Proper exception handling should be implemented
+        }
+    }
