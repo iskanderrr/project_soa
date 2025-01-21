@@ -43,6 +43,28 @@ public boolean deleteDonationById(int id) {
             throw e;  // Proper exception handling should be implemented
         }
     }
+    public Donation updateDonation(int id, Donation newDonationDetails) {
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            Donation donation = session.get(Donation.class, id);
+            if (donation != null) {
+                donation.setName(newDonationDetails.getName());
+                donation.setAmount(newDonationDetails.getAmount());
+                donation.setKeepAnonymous(newDonationDetails.isKeepAnonymous());
+                donation.setMessage(newDonationDetails.getMessage());
+                session.update(donation);
+                tx.commit();
+                return donation;
+            } else {
+                tx.rollback();  // Roll back if no donation found
+                return null;
+            }
+        } catch (RuntimeException e) {
+            if (tx != null) tx.rollback();
+            throw e;  // Proper exception handling should be implemented
+        }
+    }
 
 }
 
