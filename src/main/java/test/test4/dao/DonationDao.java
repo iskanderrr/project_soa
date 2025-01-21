@@ -51,7 +51,7 @@ public boolean deleteDonationById(int id) {
             if (donation != null) {
                 donation.setName(newDonationDetails.getName());
                 donation.setAmount(newDonationDetails.getAmount());
-                donation.setKeepAnonymous(newDonationDetails.isKeepAnonymous());
+                donation.setKeep_anonymous(newDonationDetails.isKeep_anonymous());
                 donation.setMessage(newDonationDetails.getMessage());
                 session.update(donation);
                 tx.commit();
